@@ -38,9 +38,9 @@ public class CustomLogger {
         System.out.printf("%s method= %s",dateFormat.format(date),joinPoint.getSignature().getName());
 
 
-        System.out.printf(" address=%s message= Welcome %s as a new customer \n %s",email,name,joinPoint.getTarget());
+        System.out.printf(" address=%s message= Welcome %s as a new customer \n %s",email,name,((EmailSender)joinPoint.getTarget()) .getOutgoingMailServer());
     }
-    @Around("execution(* EmailSender.sendEmail(..))")
+    @Around("execution(* cs544.aop1.dao.CustomerDAO.*(..))")
     public Object invoke(ProceedingJoinPoint call ) throws Throwable {
         StopWatch sw = new StopWatch();
         sw.start(call.getSignature().getName());
